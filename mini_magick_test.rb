@@ -1,5 +1,7 @@
 require 'mini_magick'
-image = MiniMagick::Image.open(ARGV[0])
+$stdin.binmode
+input = $stdin.read
+image = MiniMagick::Image.read(input)
 image.combine_options do |c|
   c.gravity 'Center'
   c.pointsize '22'
@@ -8,5 +10,5 @@ image.combine_options do |c|
   c.draw "text 0,0 'ployglot-etude'"
   c.fill 'gray'
 end
-image.write(ARGV[1])
+image.write($stdout)
 puts "ok" 
